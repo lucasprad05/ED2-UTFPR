@@ -5,16 +5,16 @@
 def bubbleSort(v, o):
     change = True
     n = len(v)
+
     while change == True:
         change = False
-        if o == 0:
-            for i in n:
+        for i in range(n - 1):
+            if o == '0':#crescente
                 if v[i] > v[i + 1]:
                     v[i], v[i + 1] = v[i + 1], v[i]
                     change = True
                     print(v)
-        else:
-            for i in n:
+            else:#decrescente
                 if v[i] < v[i + 1]:
                     v[i], v[i + 1] = v[i + 1], v[i]
                     change = True
