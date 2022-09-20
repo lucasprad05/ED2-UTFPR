@@ -3,7 +3,7 @@
 #Data Structures 2
 
 import sys
-from time import time
+import time
 import random
 
 #Heap Sort
@@ -149,29 +149,33 @@ else:
 comp = 0
 
 for i in range (6):
+    start = time.time()
     if i == 0:
-        start = time()
         comp = insertionSort(array, len(array))
-        end = time()
-        time = (end - start) * 1000
-        print('insertionSort: ', array, comp, 'comp', time, 'ms')
+        end = time.time()
+        print('insertionSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
 
     elif i == 1:
         comp = selectionSort(array, len(array))
-        print('selectionSort: ', array, comp, 'comp', 'ms')
+        end = time.time()
+        print('selectionSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
 
     elif i == 2:
         comp = bubbleSort(array, len(array))
-        print('bubbleSort: ', array, comp, 'comp', 'ms')
+        end = time.time()
+        print('bubbleSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
 
     elif i == 3:
         comp = mergeSort(array)
-        print('mergeSort: ', array, comp, 'comp', 'ms')
+        end = time.time()
+        print('mergeSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
     
     elif i == 4:
         comp = quickSort(array)
-        print('quickSort: ', array, comp, 'comp',  'ms')
+        end = time.time()
+        print('quickSort: ', array, comp, 'comp', (end - start) * 1000,  'ms')
     
     elif i == 5:
         comp = heapSort(array)
-        print('heapSort: ', array, comp, 'comp', 'ms')
+        end = time.time()
+        print('heapSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
