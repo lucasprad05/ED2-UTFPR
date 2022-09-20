@@ -3,8 +3,8 @@
 #Data Structures 2
 
 import sys
-import time
 import random
+from time import time
 
 #Heap Sort
 def heapify(array, n, i):
@@ -149,33 +149,33 @@ else:
 comp = 0
 
 for i in range (6):
-    start = time.time()
+    start = time()
     if i == 0:
         comp = insertionSort(array, len(array))
-        end = time.time()
+        end = time()
         print('insertionSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
 
     elif i == 1:
         comp = selectionSort(array, len(array))
-        end = time.time()
+        end = time()
         print('selectionSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
 
     elif i == 2:
         comp = bubbleSort(array, len(array))
-        end = time.time()
+        end = time()
         print('bubbleSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
 
     elif i == 3:
         comp = mergeSort(array)
-        end = time.time()
+        end = time()
         print('mergeSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
     
     elif i == 4:
         comp = quickSort(array)
-        end = time.time()
+        end = time()
         print('quickSort: ', array, comp, 'comp', (end - start) * 1000,  'ms')
     
     elif i == 5:
         comp = heapSort(array)
-        end = time.time()
+        end = time()
         print('heapSort: ', array, comp, 'comp', (end - start) * 1000, 'ms')
