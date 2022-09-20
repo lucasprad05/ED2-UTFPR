@@ -3,42 +3,45 @@
 #Data Structures 2
 
 import sys
-import time
+from time import time
 import random
 
 #Heap Sort
 def heapify(array, n, i):
+    compare = 0
     largest = i
     l = 2 * i + 1
     r = 2 * i + 2
+    compare += 1
     if l < n and array[i] < array[l]:
         largest = l
+    compare += 1
     if r < n and array[largest] < array[r]:
         largest = r
+    compare += 1
     if largest != i:
         array[i], array[largest] = array[largest], array[i]
         heapify(array, n, largest)
+    return compare
 
 def heapSort(array):
-    start_time = time.time()
     compare = 0
     for i in range(len(array), -1, -1):
-        heapify(array, len(array), i)
+        compare = heapify(array, len(array), i)
     for i in range(len(array)-1, 0, -1):
         array[i], array[0] = array[0], array[i]
-        heapify(array, i, 0)
-    end_time = time.time()
-    return compare, (end_time - start_time)/1000
+        compare = heapify(array, i, 0)
+    return compare
 
 #Quick Sort
 def quickSort(array):
-    start_time = time.time()
     compare = 0
     if len(array) > 1:
         pivot = array[0]
         less = []
         greater = []
         for i in range(1, len(array)):
+            compare += 1
             if array[i] < pivot:
                 less.append(array[i])
             else:
@@ -46,12 +49,10 @@ def quickSort(array):
         quickSort(less)
         quickSort(greater)
         array[:] = less + [pivot] + greater
-    end_time = time.time()
-    return compare, (end_time - start_time)/1000
+    return compare
 
 #Merge Sort
 def mergeSort(array):
-    start_time = time.time()
     compare = 0
     if len(array) > 1:
         r = len(array)//2
@@ -61,6 +62,7 @@ def mergeSort(array):
         mergeSort(M)
         i = j = k = 0
         while i < len(L) and j < len(M):
+            compare += 1
             if L[i] < M[j]:
                 array[k] = L[i]
                 i += 1
@@ -76,51 +78,48 @@ def mergeSort(array):
             array[k] = M[j]
             j += 1
             k += 1
-    end_time = time.time()
-    return compare, (end_time - start_time)/1000
+    return compare
 
 #Insertion Sort
 def insertionSort(array, n):
-    start_time = time.time()
     compare = 0
     for i in range(1, n):
         aux = array[i]
         j = i - 1
+        compare += 1
         while j >= 0 and aux < array[j]:
             array[j+1] = array[j]
             j = j - 1
-        array[j+1] = aux  
-    end_time = time.time()
-    return compare, (end_time - start_time)/1000
+        array[j+1] = aux
+    return compare
 
 #Selection Sort
 def selectionSort(array, n):
-    start_time = time.time()
     compare = 0
     n -= 1
     for i in range(n):
         aux = i
         for j in range(i, n):
+            compare += 1
             if array[j] < array[aux]:
                 aux = j
+        compare += 1
         if aux != array[i]:
             array[aux], array[i] = array[i], array[aux]
-    end_time = time.time()
-    return compare, (end_time - start_time)/1000
+    return compare
 
 #Bubble Sort
 def bubbleSort(array, n):
-    start_time = time.time()
     compare = 0
     change = True
     while change == True:
         change = False
         for i in range(n - 1):
+            compare += 1
             if array[i] > array[i + 1]:
                 array[i], array[i + 1] = array[i + 1], array[i]
                 change = True
-    end_time = time.time()
-    return compare, (end_time - start_time)/1000
+    return compare
 
 #Main
 option = 'r'#c d ou s ler do ARQUIVO
@@ -130,37 +129,49 @@ array = list(range(N))
 if option == 'c':
     for i in range(N):
         array[i] = i + 1
-    print(array)
+    #print(array)
 elif option == 'd':
     #d
     aux = N
     for i in range(N):
         array[i] = aux
         aux -=1
-    print(array)
+    #print(array)
 elif option == 'r':
     #random
     for i in range(N):
         array[i] = random.randint(0, 32000)
-    print(array)
+    #print(array)
 else:
     print('Opção inválida!')
 
 #Sorts
-insertionSort(array, len(array))
-print('Insertion: ', array)
+comp = 0
 
-selectionSort(array, len(array))
-print('Selection: ', array)
+for i in range (6):
+    if i == 0:
+        start = time()
+        comp = insertionSort(array, len(array))
+        end = time()
+        time = (end - start) * 1000
+        print('insertionSort: ', array, comp, 'comp', time, 'ms')
 
-bubbleSort(array, len(array))
-print('Bubble: ', array)
+    elif i == 1:
+        comp = selectionSort(array, len(array))
+        print('selectionSort: ', array, comp, 'comp', 'ms')
 
-mergeSort(array)
-print('Merge: ', array)
+    elif i == 2:
+        comp = bubbleSort(array, len(array))
+        print('bubbleSort: ', array, comp, 'comp', 'ms')
 
-quickSort(array)
-print('Quick: ', array)
-
-heapSort(array)
-print('Heap: ', array)
+    elif i == 3:
+        comp = mergeSort(array)
+        print('mergeSort: ', array, comp, 'comp', 'ms')
+    
+    elif i == 4:
+        comp = quickSort(array)
+        print('quickSort: ', array, comp, 'comp',  'ms')
+    
+    elif i == 5:
+        comp = heapSort(array)
+        print('heapSort: ', array, comp, 'comp', 'ms')
